@@ -10,7 +10,7 @@ export default {
             return;
         }
 
-        state.cart.push({
+        state.cart.unshift({
             product,
             quantity
         })

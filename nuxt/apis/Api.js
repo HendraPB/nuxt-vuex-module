@@ -1,7 +1,22 @@
-import axios from "axios";
+let client
 
-const Api = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api'
-});
+export function api (newclient) {
+  client = newclient
+}
 
-export default Api;
+// Request helpers
+const reqMethods = [
+  'request', 'delete', 'get', 'head', 'options', // url, config
+  'post', 'put', 'patch' // url, data, config
+]
+
+let Api = {}
+
+reqMethods.forEach((method) => {
+  Api[method] = function () {
+    if (!client) throw new Error('apiClient not installed')
+    return client[method].apply(null, arguments)
+  }
+})
+
+export default Api

@@ -26,10 +26,14 @@ export default {
     ...mapActions("cart", ["addProductToCart"]),
 
     addToCart() {
-      this.addProductToCart({
-        product: this.product,
-        quantity: 1
-      });
+      if (this.authenticated) {
+        this.addProductToCart({
+          product: this.product,
+          quantity: 1
+        });
+      } else {
+        this.$router.push('/auth/login');
+      }
     }
   }
 };

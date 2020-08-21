@@ -35,6 +35,8 @@ export default {
     clearTimeout(this.timeout);
   },
 
-  methods: mapActions(["removeNotification"])
+  methods: {
+    ...mapActions("notification", ["removeNotification"])
+  },
 };
 </script>

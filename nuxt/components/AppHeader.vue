@@ -3,11 +3,18 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <div class="container">
         <div class="nav navbar-nav">
-          <nuxt-link to="/" class="nav-tem nav-link active">Home</nuxt-link>
-          <!-- <a class="nav-item nav-link" href="#">Product</a> -->
+          <nuxt-link to="/" class="nav-item nav-link active">Home</nuxt-link>
+          <template  v-if="authenticated">
+            <nuxt-link to="/dashboard" class="nav-item nav-link active">Dashboard</nuxt-link>
+            <a @click.prevent="logout" href="#" class="nav-item nav-link active">Logout</a>
+          </template>
+          <template v-else>
+            <nuxt-link to="/auth/login" class="nav-item nav-link active">Login</nuxt-link>
+            <nuxt-link to="/auth/register" class="nav-item nav-link active">Register</nuxt-link>
+          </template>
         </div>
 
-        <div>
+        <div v-if="authenticated">
           <div class="dropdown open">
             <button
               class="btn btn-secondary dropdown-toggle"
@@ -28,7 +35,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import MiniCart from "./MiniCart";
 
 export default {
@@ -36,6 +43,19 @@ export default {
 
   computed: {
     ...mapGetters("cart", ["cartItemCount"])
+  },
+
+  methods: {
+    ...mapActions("cart", ["clearStateCartItems"]),
+
+    async logout() {
+      try {
+        await this.$auth.logout();
+      } catch(e) {
+        return;
+      }
+      this.clearStateCartItems();
+    }
   }
 };
 </script>

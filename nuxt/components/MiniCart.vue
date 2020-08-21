@@ -4,6 +4,11 @@
     style="min-width:320px; right:0; left:auto"
     aria-labelledby="triggerId"
   >
+    <div class="d-flex justify-content-between">
+      <span>{{ user.name }}'s cart</span>
+    </div>
+    <hr />
+
     <div v-for="item in cart" :key="item.product.id">
       <div class="px-2 d-flex justify-content-between">
         <div>
@@ -55,12 +60,17 @@ export default {
     this.getCartItems();
   },
 
+  destroyed() {
+    // this.clearStateCartItems();
+  },
+
   methods: {
     // Example 1: mapActions
     ...mapActions("cart", [
       "removeProductFromCart",
       "clearCartItems",
-      "getCartItems"
+      "getCartItems",
+      // "clearStateCartItems"
     ])
 
     // Example 2: mapActions

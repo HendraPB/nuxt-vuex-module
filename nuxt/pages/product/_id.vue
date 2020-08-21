@@ -39,10 +39,14 @@ export default {
     ...mapActions("cart", ["addProductToCart"]),
 
     addToCart() {
-      this.addProductToCart({
-        product: this.product,
-        quantity: this.quantity
-      });
+      if (this.authenticated) {
+        this.addProductToCart({
+          product: this.product,
+          quantity: this.quantity
+        });
+      } else {
+        this.$router.push('/auth/login');
+      }
     }
   }
 };
