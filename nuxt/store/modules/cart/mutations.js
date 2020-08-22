@@ -28,5 +28,13 @@ export default {
 
     CLEAR_CART_ITEMS(state) {
         state.cart = [];
-    }
+    },
+
+    SET_TEMP_CART(state, cartItem) {
+        state.tempCart = cartItem;
+    },
+
+    CLEAR_TEMP_CART_ITEM(state) {
+        state.tempCart = {};
+    },
 }

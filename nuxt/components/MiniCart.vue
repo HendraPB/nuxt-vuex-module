@@ -57,7 +57,9 @@ export default {
   },
 
   mounted() {
-    this.getCartItems();
+    // if (!this.cart.length) {
+    //   this.getCartItems();
+    // }
   },
 
   destroyed() {

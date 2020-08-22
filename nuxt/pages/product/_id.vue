@@ -36,7 +36,7 @@ export default {
   methods: {
     ...mapActions("product", ["getProduct"]),
 
-    ...mapActions("cart", ["addProductToCart"]),
+    ...mapActions("cart", ["addProductToCart", "addProductToTempCart"]),
 
     addToCart() {
       if (this.authenticated) {
@@ -45,6 +45,10 @@ export default {
           quantity: this.quantity
         });
       } else {
+        this.addProductToTempCart({
+          product: this.product,
+          quantity: this.quantity
+        });
         this.$router.push('/auth/login');
       }
     }

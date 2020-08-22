@@ -23,7 +23,7 @@ export default {
   props: ["product"],
 
   methods: {
-    ...mapActions("cart", ["addProductToCart"]),
+    ...mapActions("cart", ["addProductToCart", "addProductToTempCart"]),
 
     addToCart() {
       if (this.authenticated) {
@@ -32,6 +32,10 @@ export default {
           quantity: 1
         });
       } else {
+        this.addProductToTempCart({
+          product: this.product,
+          quantity: 1
+        });
         this.$router.push('/auth/login');
       }
     }

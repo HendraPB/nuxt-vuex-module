@@ -1,5 +1,6 @@
 const state = () => ({
-    cart: []
+    cart: [],
+    tempCart: {}
 })
 
 export default state

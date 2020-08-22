@@ -45,5 +45,18 @@ export default {
 
     clearStateCartItems({ commit, dispatch }) {
         commit('CLEAR_CART_ITEMS');
+    },
+
+    addProductToTempCart({ commit, dispatch }, { product, quantity }) {
+        commit('SET_TEMP_CART', { product, quantity });
+
+        dispatch('notification/addNotification', {
+            type: 'danger',
+            message: 'You must be logged in to add products to the cart.'
+        }, { root: true });
+    },
+
+    clearTempCart({ commit, dispatch }) {
+        commit('CLEAR_TEMP_CART_ITEM');
     }
 }

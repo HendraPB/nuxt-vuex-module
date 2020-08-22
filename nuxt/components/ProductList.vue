@@ -17,7 +17,9 @@ export default {
   },
 
   mounted() {
-    this.getProducts();
+    if (!this.products.length) {
+      this.getProducts();
+    }
   },
 
   methods: {

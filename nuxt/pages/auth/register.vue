@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
     middleware: 'guest',
     data() {
@@ -56,14 +58,28 @@ export default {
             error: this.$route.query.error
         }
     },
+    computed: {
+        ...mapState("cart", ["cart", "tempCart"])
+    },
     methods: {
+        ...mapActions("cart", ["getCartItems","addProductToCart", "clearTempCart"]),
+
         async register() {
             try {
                 await this.$axios.post('/auth/register', this.form);
+                await this.$auth.login({data: this.form});
             } catch(e) {
                 return;
             }
-            this.$auth.login({data: this.form});
+
+            if (this.tempCart) {
+                this.addProductToCart({
+                    product: this.tempCart.product,
+                    quantity: this.tempCart.quantity
+                });
+                this.clearTempCart();
+            }
+            this.getCartItems();
             
             this.$router.push({name: 'index'});
         }
