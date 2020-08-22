@@ -3,14 +3,14 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark">
       <div class="container">
         <div class="nav navbar-nav">
-          <nuxt-link to="/" class="nav-item nav-link active">Home</nuxt-link>
+          <nuxt-link to="/" class="nav-item nav-link">Home</nuxt-link>
           <template  v-if="authenticated">
-            <nuxt-link to="/dashboard" class="nav-item nav-link active">Dashboard</nuxt-link>
-            <a @click.prevent="logout" href="#" class="nav-item nav-link active">Logout</a>
+            <nuxt-link to="/dashboard" class="nav-item nav-link">Dashboard</nuxt-link>
+            <a @click.prevent="logout" href="#" class="nav-item nav-link">Logout</a>
           </template>
           <template v-else>
-            <nuxt-link to="/auth/login" class="nav-item nav-link active">Login</nuxt-link>
-            <nuxt-link to="/auth/register" class="nav-item nav-link active">Register</nuxt-link>
+            <nuxt-link to="/auth/login" class="nav-item nav-link">Login</nuxt-link>
+            <nuxt-link to="/auth/register" class="nav-item nav-link">Register</nuxt-link>
           </template>
         </div>
 

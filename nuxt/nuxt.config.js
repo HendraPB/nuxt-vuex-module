@@ -38,7 +38,9 @@ export default {
   router: {
     middleware: [
       'clearValidationErrors'
-    ]
+    ],
+    linkActiveClass: '',
+    linkExactActiveClass: 'active',
   },
   /*
   ** Global CSS
